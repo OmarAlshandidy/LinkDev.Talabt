@@ -1,26 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json;
-using System.Threading.Tasks;
+﻿using System.Text.Json;
+using LinkDev.Talabat.Core.Domain.Contracts;
 using LinkDev.Talabat.Core.Domain.Entites.Products;
 
 namespace LinkDev.Talabat.Infrastructure.Persistence.Data
 {
-    public static class StoreContextSeed
+    internal class StoreContextInitializer(StoreContext dbContext) : IStoreContextInitializer
     {
-        public static async Task SeedAsync(StoreContext dbContext)
+       
+        public async Task InitializeAsync()
         {
-            if(!dbContext.Brands.Any())
+            var pendingMigrations = await dbContext.Database.GetPendingMigrationsAsync();
+            if (pendingMigrations.Any())
+            {
+                // Apply any pending migrations to the database
+                await dbContext.Database.MigrateAsync();
+            }
+        }
+
+        public async Task SeedAsync()
+        {
+            if (!dbContext.Brands.Any())
             {
                 var brandsData = await File.ReadAllTextAsync($"../LinkDev.Talabat.Infrastructure.Persistence/Data/Seeds/brands.json");
                 var brands = JsonSerializer.Deserialize<List<ProductBrand>>(brandsData);
-            if (brands?.Count >0)
+                if (brands?.Count > 0)
                 {
                     await dbContext.Set<ProductBrand>().AddRangeAsync(brands);
                 }
-                await dbContext.SaveChangesAsync(); 
+                await dbContext.SaveChangesAsync();
 
             }
 
