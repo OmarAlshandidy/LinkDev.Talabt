@@ -8,7 +8,7 @@ using LinkDev.Talabat.Infrastructure.Persistence.Data.Config.Base;
 
 namespace LinkDev.Talabat.Infrastructure.Persistence.Data.Config.Products
 {
-    internal class CategoryConfigurations :BaseEntityConfigurations<ProductCategory, int>
+    internal class CategoryConfigurations :BaseAuditableEntityConfigurations<ProductCategory, int>
     {
         public override void Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<ProductCategory> builder)
         {
