@@ -1,1 +1,3 @@
-﻿global using LinkDev.Talabat.Core.Domain.Comman;
+﻿global using LinkDev.Talabat.Core.Domain.Common;
+
+
