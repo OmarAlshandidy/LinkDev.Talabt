@@ -14,9 +14,10 @@ namespace LinkDev.Talabat.Core.Application.Mapping
         public MappingProfile()
         {
             CreateMap<Product, ProductDto>()
-                .ForMember(d => d.Brand, O => O.MapFrom(src => src.Brand!.Name));
-            CreateMap<Product, ProductDto>()
-            .ForMember(d => d.Category, O => O.MapFrom(src => src.Category!.Name));
+                   .ForMember(d => d.Brand, o => o.MapFrom(src => src.Brand!.Name))
+                   .ForMember(d => d.Category, o => o.MapFrom(src => src.Category!.Name))
+                   .ForMember(d =>d.PictureUrl , o => o.MapFrom<ProductPictureUrlResolver>());
+
 
             CreateMap<ProductBrand, BrandDto>();
             CreateMap<ProductCategory, CategoryDto>();

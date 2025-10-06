@@ -19,11 +19,13 @@ namespace LinkDev.Talabat.APIs
 
             #region Configure Service
             // Add services to the container.
+            webApplicationBuilder.Services
+                .AddControllers().AddApplicationPart(typeof(Controller.AssemblyInformation).Assembly);
 
             webApplicationBuilder.Services.AddControllers(); //Register Required Service By Asp.Net Core Web APIs To DI Container 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             webApplicationBuilder.Services.AddEndpointsApiExplorer();
-            webApplicationBuilder.Services.AddSwaggerGen();
+            webApplicationBuilder.Services.AddSwaggerGen(); 
             webApplicationBuilder.Services.AddHttpContextAccessor(); //Register Required Service By Asp.Net Core Web APIs To DI Container
             webApplicationBuilder.Services.AddScoped(typeof(ILoggedInUserService), typeof(LoggedInUserService));
 
@@ -49,7 +51,7 @@ namespace LinkDev.Talabat.APIs
             }
 
             app.UseHttpsRedirection();
-            
+            app.UseStaticFiles(); // Enable Static File Middleware to Serve Static Files (wwwroot)  
 
             app.MapControllers(); 
             #endregion

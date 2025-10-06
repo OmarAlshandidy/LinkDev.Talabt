@@ -1,14 +1,14 @@
 ﻿using System.Text.Json;
-using LinkDev.Talabat.Core.Domain.Contracts;
+using LinkDev.Talabat.Core.Domain.Contracts.Persistence;
 using LinkDev.Talabat.Core.Domain.Entites.Products;
 
 namespace LinkDev.Talabat.Infrastructure.Persistence.Data
 {
-    internal class StoreContextInitializer(StoreContext dbContext) : IStoreContextInitializer
+    internal class  StoreContextInitializer(StoreContext dbContext) : IStoreContextInitializer
     {
        
         public async Task InitializeAsync()
-        {
+            {
             var pendingMigrations = await dbContext.Database.GetPendingMigrationsAsync();
             if (pendingMigrations.Any())
             {

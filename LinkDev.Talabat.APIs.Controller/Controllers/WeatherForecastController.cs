@@ -1,11 +1,12 @@
-using LinkDiv.Talabat.APIs.Models;
+using LinkDev.Talabat.APIs.Controller.Models;
+using LinkDev.Talabat.APIs.Controllers.Base;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace LinkDiv.Talabat.APIs.Controllers
 {
-    [ApiController]
-    [Route("[controller]")]
-    public class WeatherForecastController : ControllerBase
+    
+    public class WeatherForecastController : BaseApiController
     {
         private static readonly string[] Summaries = new[]
         {
