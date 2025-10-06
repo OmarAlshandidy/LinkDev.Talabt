@@ -17,6 +17,7 @@ namespace LinkDev.Talabat.Core.Application
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
             services.AddAutoMapper(Mapper=>Mapper.AddProfile(typeof(MappingProfile)));
+            services.AddTransient<ProductPictureUrlResolver>();
             services.AddScoped(typeof(IServiceManager), typeof(ServiceManager));
 
             return services;
